@@ -6,10 +6,13 @@ from .serializers import TaskSerializer
 
 
 class TaskView(viewsets.ModelViewSet):
+    """Класс тасков."""
+
     serializer_class = TaskSerializer
     queryset = Task.objects.all()
 
     def destroy(self, *args, **kwargs):
+        """Метод."""
         serializer = self.get_serializer(self.get_object())
         super().destroy(*args, **kwargs)
         return Response(serializer.data, status=status.HTTP_200_OK)
